@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>咕卡贴贴</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #EFF6FF 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(251, 207, 232, 0.3), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .logo { font-size: 56px; margin-bottom: 16px; }
+    .app-name {
+      font-size: 28px;
+      font-weight: 800;
+      color: #be185d;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      font-size: 15px;
+      color: #9CA3AF;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, #FBCFE8, #E9D5FF, #BFDBFE);
+      border-radius: 99px;
+      margin-bottom: 32px;
+    }
+    .links { display: flex; flex-direction: column; gap: 12px; }
+    .link-btn {
+      display: block;
+      padding: 14px 24px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .link-btn:active { transform: scale(0.97); }
+    .link-primary {
+      background: linear-gradient(135deg, #FBCFE8, #E9D5FF);
+      color: #be185d;
+    }
+    .link-secondary {
+      background: #F9FAFB;
+      color: #6B7280;
+      border: 1px solid #F3F4F6;
+    }
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #E5E7EB;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🌸</div>
+    <div class="app-name">咕卡贴贴</div>
+    <div class="tagline">数字化咕卡贴纸制作应用<br>让每张照片变成可爱贴纸</div>
+    <div class="divider"></div>
+    <div class="links">
+      <a href="privacy.html" class="link-btn link-primary">隐私政策</a>
+      <a href="terms.html" class="link-btn link-secondary">用户协议</a>
+    </div>
+    <div class="footer">© 2026 咕卡贴贴</div>
+  </div>
+</body>
+</html>
