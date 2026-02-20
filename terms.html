@@ -88,123 +88,287 @@
     }
     .footer a { color: #be185d; text-decoration: none; }
     a { color: #be185d; }
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      background: white;
+      border-radius: 20px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #9CA3AF;
+      transition: all 0.15s;
+    }
+    .lang-btn.active { background: #FBCFE8; color: #be185d; }
+    .en { display: none; }
+    html.lang-en .en { display: initial; }
+    html.lang-en .zh { display: none; }
   </style>
 </head>
 <body>
+  <div class="lang-switcher">
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">CN</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
   <div class="container">
     <div class="header">
       <div class="logo">🌸</div>
-      <div class="app-name">咕卡贴贴</div>
-      <div class="doc-title">用户协议</div>
-      <div class="meta">版本 1.0 &nbsp;·&nbsp; 生效日期：2026年3月1日</div>
+      <div class="app-name">
+        <span class="zh">咕卡贴贴</span>
+        <span class="en">GuKa Sticker</span>
+      </div>
+      <div class="doc-title">
+        <span class="zh">用户协议</span>
+        <span class="en">Terms of Service</span>
+      </div>
+      <div class="meta">
+        <span class="zh">版本 1.0 &nbsp;·&nbsp; 生效日期：2026年3月1日</span>
+        <span class="en">Version 1.0 &nbsp;·&nbsp; Effective Date: March 1, 2026</span>
+      </div>
     </div>
     <div class="divider"></div>
 
-    <div class="highlight-box">
-      欢迎使用咕卡贴贴！在使用本应用前，请您仔细阅读本用户协议。当您下载、安装或使用本应用时，即表示您已阅读、理解并同意接受本协议的所有条款。
+    <!-- Chinese Content -->
+    <div class="zh">
+      <div class="highlight-box">
+        欢迎使用咕卡贴贴！在使用本应用前，请您仔细阅读本用户协议。当您下载、安装或使用本应用时，即表示您已阅读、理解并同意接受本协议的所有条款。
+      </div>
+
+      <h2>一、接受协议</h2>
+      <p>当您下载、安装或使用本应用时，即表示您已阅读、理解并同意接受本协议的所有条款。如果您不同意本协议的任何条款，请立即停止使用本应用。</p>
+
+      <h2>二、账户注册与安全</h2>
+      <h3>2.1 账户注册</h3>
+      <ul>
+        <li>您可以通过 Apple ID 登录咕卡贴贴，无需另行创建独立账户</li>
+        <li>您需确保提供的账户信息真实、准确、完整</li>
+        <li>每位用户只能持有一个有效账户</li>
+      </ul>
+      <h3>2.2 账户安全</h3>
+      <ul>
+        <li>您负责维护账户的保密性和安全性</li>
+        <li>如发现账户被未经授权使用，请立即通知我们</li>
+        <li>因您未妥善保管账户信息导致的损失，由您自行承担</li>
+      </ul>
+
+      <h2>三、服务内容</h2>
+      <p>咕卡贴贴提供以下服务：</p>
+      <ol>
+        <li><strong>AI 贴纸生成</strong>：通过人工智能技术，将您的照片转化为可爱的贴纸图案</li>
+        <li><strong>贴纸编辑</strong>：对生成的贴纸进行裁剪、调色、风格化处理</li>
+        <li><strong>贴纸收藏</strong>：在本地管理和保存您的贴纸合集</li>
+        <li><strong>导出分享</strong>：将贴纸导出为图片或分享至其他平台</li>
+        <li><strong>订阅服务</strong>：提供高级功能的付费订阅方案</li>
+      </ol>
+
+      <h2>四、用户行为规范</h2>
+      <h3>4.1 禁止行为</h3>
+      <p>您在使用本应用时，不得：</p>
+      <ul>
+        <li>上传、生成或传播违法、违规、淫秽、暴力、歧视性内容</li>
+        <li>侵犯他人隐私权、肖像权、著作权及其他知识产权</li>
+        <li>上传他人照片用于生成贴纸（除非获得明确授权）</li>
+        <li>利用本应用进行商业欺诈、虚假宣传等不正当行为</li>
+        <li>尝试破解、反编译或绕过本应用的技术保护措施</li>
+        <li>干扰或破坏本应用及相关服务的正常运行</li>
+      </ul>
+      <h3>4.2 内容责任</h3>
+      <ul>
+        <li>您对通过本应用上传、生成和分享的内容承担全部责任</li>
+        <li>我们有权对违规内容进行删除，并对违规账户采取限制措施</li>
+      </ul>
+
+      <h2>五、知识产权</h2>
+      <h3>5.1 我们的权利</h3>
+      <ul>
+        <li>本应用的软件代码、界面设计、Logo 及相关素材的知识产权归我们所有</li>
+        <li>未经许可，您不得复制、修改、分发或用于商业目的</li>
+      </ul>
+      <h3>5.2 您的内容</h3>
+      <ul>
+        <li>您上传的原始照片的知识产权归您所有</li>
+        <li>对于通过本应用 AI 生成的贴纸，您拥有个人使用权</li>
+        <li>您授予我们在提供服务过程中必要的技术处理权限（如图像压缩、格式转换等）</li>
+      </ul>
+
+      <h2>六、付费与订阅</h2>
+      <h3>6.1 订阅服务</h3>
+      <ul>
+        <li>咕卡贴贴提供自动续期订阅服务，具体定价请以 App Store 页面为准</li>
+        <li>订阅费用将通过您的 Apple ID 账户扣除</li>
+      </ul>
+      <h3>6.2 自动续期</h3>
+      <ul>
+        <li>订阅将在到期前 24 小时自动续期</li>
+        <li>如需取消，请在当前订阅周期结束前 24 小时在 App Store 订阅管理页面操作</li>
+      </ul>
+      <h3>6.3 退款政策</h3>
+      <ul>
+        <li>退款申请须通过 Apple App Store 提交，我们无法直接处理退款</li>
+        <li>请参考 Apple 的退款政策</li>
+      </ul>
+
+      <h2>七、免责声明</h2>
+      <h3>7.1 服务可用性</h3>
+      <ul>
+        <li>我们将尽力保证服务稳定，但不对因网络故障、服务器维护等导致的服务中断承担责任</li>
+        <li>AI 生成结果可能因图片质量、内容复杂度等因素存在差异，我们不保证特定的生成效果</li>
+      </ul>
+      <h3>7.2 第三方服务</h3>
+      <ul>
+        <li>本应用使用了 Google Gemini AI 技术，相关服务受 Google 服务条款约束</li>
+        <li>本应用使用了 Apple Sign In，相关服务受 Apple 服务条款约束</li>
+      </ul>
+
+      <h2>八、协议变更</h2>
+      <p>我们保留随时修改本协议的权利。协议更新后，我们将通过应用内通知告知您。继续使用本应用即视为您同意更新后的协议。</p>
+
+      <h2>九、联系我们</h2>
+      <div class="highlight-box">
+        <p>如您对本协议有任何疑问，请联系：</p>
+        <ul>
+          <li><strong>应用内反馈</strong>：在「我的」页面点击「意见反馈」</li>
+          <li><strong>电子邮件</strong>：<a href="mailto:solesnip@gmail.com">solesnip@gmail.com</a></li>
+        </ul>
+      </div>
     </div>
 
-    <h2>一、接受协议</h2>
-    <p>当您下载、安装或使用本应用时，即表示您已阅读、理解并同意接受本协议的所有条款。如果您不同意本协议的任何条款，请立即停止使用本应用。</p>
+    <!-- English Content -->
+    <div class="en">
+      <div class="highlight-box">
+        Welcome to GuKa Sticker! Please read these Terms of Service carefully before using the app. By downloading, installing, or using the app, you acknowledge that you have read, understood, and agreed to all terms of this agreement.
+      </div>
 
-    <h2>二、账户注册与安全</h2>
-    <h3>2.1 账户注册</h3>
-    <ul>
-      <li>您可以通过 Apple ID 登录咕卡贴贴，无需另行创建独立账户</li>
-      <li>您需确保提供的账户信息真实、准确、完整</li>
-      <li>每位用户只能持有一个有效账户</li>
-    </ul>
-    <h3>2.2 账户安全</h3>
-    <ul>
-      <li>您负责维护账户的保密性和安全性</li>
-      <li>如发现账户被未经授权使用，请立即通知我们</li>
-      <li>因您未妥善保管账户信息导致的损失，由您自行承担</li>
-    </ul>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By downloading, installing, or using this app, you acknowledge that you have read, understood, and agreed to all terms of this agreement. If you do not agree with any terms, please stop using the app immediately.</p>
 
-    <h2>三、服务内容</h2>
-    <p>咕卡贴贴提供以下服务：</p>
-    <ol>
-      <li><strong>AI 贴纸生成</strong>：通过人工智能技术，将您的照片转化为可爱的贴纸图案</li>
-      <li><strong>贴纸编辑</strong>：对生成的贴纸进行裁剪、调色、风格化处理</li>
-      <li><strong>贴纸收藏</strong>：在本地管理和保存您的贴纸合集</li>
-      <li><strong>导出分享</strong>：将贴纸导出为图片或分享至其他平台</li>
-      <li><strong>订阅服务</strong>：提供高级功能的付费订阅方案</li>
-    </ol>
-
-    <h2>四、用户行为规范</h2>
-    <h3>4.1 禁止行为</h3>
-    <p>您在使用本应用时，不得：</p>
-    <ul>
-      <li>上传、生成或传播违法、违规、淫秽、暴力、歧视性内容</li>
-      <li>侵犯他人隐私权、肖像权、著作权及其他知识产权</li>
-      <li>上传他人照片用于生成贴纸（除非获得明确授权）</li>
-      <li>利用本应用进行商业欺诈、虚假宣传等不正当行为</li>
-      <li>尝试破解、反编译或绕过本应用的技术保护措施</li>
-      <li>干扰或破坏本应用及相关服务的正常运行</li>
-    </ul>
-    <h3>4.2 内容责任</h3>
-    <ul>
-      <li>您对通过本应用上传、生成和分享的内容承担全部责任</li>
-      <li>我们有权对违规内容进行删除，并对违规账户采取限制措施</li>
-    </ul>
-
-    <h2>五、知识产权</h2>
-    <h3>5.1 我们的权利</h3>
-    <ul>
-      <li>本应用的软件代码、界面设计、Logo 及相关素材的知识产权归我们所有</li>
-      <li>未经许可，您不得复制、修改、分发或用于商业目的</li>
-    </ul>
-    <h3>5.2 您的内容</h3>
-    <ul>
-      <li>您上传的原始照片的知识产权归您所有</li>
-      <li>对于通过本应用 AI 生成的贴纸，您拥有个人使用权</li>
-      <li>您授予我们在提供服务过程中必要的技术处理权限（如图像压缩、格式转换等）</li>
-    </ul>
-
-    <h2>六、付费与订阅</h2>
-    <h3>6.1 订阅服务</h3>
-    <ul>
-      <li>咕卡贴贴提供自动续期订阅服务，具体定价请以 App Store 页面为准</li>
-      <li>订阅费用将通过您的 Apple ID 账户扣除</li>
-    </ul>
-    <h3>6.2 自动续期</h3>
-    <ul>
-      <li>订阅将在到期前 24 小时自动续期</li>
-      <li>如需取消，请在当前订阅周期结束前 24 小时在 App Store 订阅管理页面操作</li>
-    </ul>
-    <h3>6.3 退款政策</h3>
-    <ul>
-      <li>退款申请须通过 Apple App Store 提交，我们无法直接处理退款</li>
-      <li>请参考 Apple 的退款政策</li>
-    </ul>
-
-    <h2>七、免责声明</h2>
-    <h3>7.1 服务可用性</h3>
-    <ul>
-      <li>我们将尽力保证服务稳定，但不对因网络故障、服务器维护等导致的服务中断承担责任</li>
-      <li>AI 生成结果可能因图片质量、内容复杂度等因素存在差异，我们不保证特定的生成效果</li>
-    </ul>
-    <h3>7.2 第三方服务</h3>
-    <ul>
-      <li>本应用使用了 Google Gemini AI 技术，相关服务受 Google 服务条款约束</li>
-      <li>本应用使用了 Apple Sign In，相关服务受 Apple 服务条款约束</li>
-    </ul>
-
-    <h2>八、协议变更</h2>
-    <p>我们保留随时修改本协议的权利。协议更新后，我们将通过应用内通知告知您。继续使用本应用即视为您同意更新后的协议。</p>
-
-    <h2>九、联系我们</h2>
-    <div class="highlight-box">
-      <p>如您对本协议有任何疑问，请联系：</p>
+      <h2>2. Account Registration &amp; Security</h2>
+      <h3>2.1 Account Registration</h3>
       <ul>
-        <li><strong>应用内反馈</strong>：在「我的」页面点击「意见反馈」</li>
-        <li><strong>电子邮件</strong>：<a href="mailto:support@guka.app">support@guka.app</a></li>
+        <li>You can sign in to GuKa Sticker using your Apple ID — no separate account creation is required</li>
+        <li>You must ensure that account information provided is truthful, accurate, and complete</li>
+        <li>Each user may only hold one active account</li>
       </ul>
+      <h3>2.2 Account Security</h3>
+      <ul>
+        <li>You are responsible for maintaining the confidentiality and security of your account</li>
+        <li>If you discover unauthorized use of your account, please notify us immediately</li>
+        <li>You assume responsibility for any losses resulting from your failure to properly safeguard your account information</li>
+      </ul>
+
+      <h2>3. Service Description</h2>
+      <p>GuKa Sticker provides the following services:</p>
+      <ol>
+        <li><strong>AI Sticker Generation</strong>: Using artificial intelligence to transform your photos into adorable sticker designs</li>
+        <li><strong>Sticker Editing</strong>: Crop, recolor, and stylize generated stickers</li>
+        <li><strong>Sticker Collection</strong>: Manage and save your sticker collection locally</li>
+        <li><strong>Export &amp; Share</strong>: Export stickers as images or share them to other platforms</li>
+        <li><strong>Subscription Service</strong>: Paid subscription plans for premium features</li>
+      </ol>
+
+      <h2>4. User Conduct</h2>
+      <h3>4.1 Prohibited Conduct</h3>
+      <p>When using this app, you may not:</p>
+      <ul>
+        <li>Upload, generate, or distribute illegal, harmful, obscene, violent, or discriminatory content</li>
+        <li>Infringe on others' privacy, portrait rights, copyrights, or other intellectual property rights</li>
+        <li>Upload photos of others for sticker generation without explicit authorization</li>
+        <li>Use the app for commercial fraud, false advertising, or other improper conduct</li>
+        <li>Attempt to crack, decompile, or bypass the app's technical protection measures</li>
+        <li>Interfere with or disrupt the normal operation of the app or related services</li>
+      </ul>
+      <h3>4.2 Content Responsibility</h3>
+      <ul>
+        <li>You bear full responsibility for content uploaded, generated, and shared through this app</li>
+        <li>We reserve the right to remove violating content and take restrictive action against violating accounts</li>
+      </ul>
+
+      <h2>5. Intellectual Property</h2>
+      <h3>5.1 Our Rights</h3>
+      <ul>
+        <li>The intellectual property rights to the app's software code, interface design, logo, and related materials belong to us</li>
+        <li>Without permission, you may not reproduce, modify, distribute, or use them for commercial purposes</li>
+      </ul>
+      <h3>5.2 Your Content</h3>
+      <ul>
+        <li>The intellectual property of the original photos you upload belongs to you</li>
+        <li>For stickers generated by the app's AI, you hold personal usage rights</li>
+        <li>You grant us the technical processing permissions necessary for providing the service (e.g., image compression, format conversion)</li>
+      </ul>
+
+      <h2>6. Payments &amp; Subscriptions</h2>
+      <h3>6.1 Subscription Service</h3>
+      <ul>
+        <li>GuKa Sticker offers auto-renewing subscription services; please refer to the App Store page for pricing</li>
+        <li>Subscription fees will be charged to your Apple ID account</li>
+      </ul>
+      <h3>6.2 Auto-Renewal</h3>
+      <ul>
+        <li>Subscriptions automatically renew 24 hours before expiration</li>
+        <li>To cancel, manage your subscription in App Store Settings at least 24 hours before the end of the current subscription period</li>
+      </ul>
+      <h3>6.3 Refund Policy</h3>
+      <ul>
+        <li>Refund requests must be submitted through the Apple App Store; we cannot process refunds directly</li>
+        <li>Please refer to Apple's refund policy</li>
+      </ul>
+
+      <h2>7. Disclaimers</h2>
+      <h3>7.1 Service Availability</h3>
+      <ul>
+        <li>We will make best efforts to ensure service stability, but we are not liable for service interruptions caused by network failures, server maintenance, or similar issues</li>
+        <li>AI-generated results may vary due to image quality, content complexity, and other factors; we do not guarantee specific generation outcomes</li>
+      </ul>
+      <h3>7.2 Third-Party Services</h3>
+      <ul>
+        <li>This app uses Google Gemini AI technology, and related services are subject to Google's Terms of Service</li>
+        <li>This app uses Sign in with Apple, and related services are subject to Apple's Terms of Service</li>
+      </ul>
+
+      <h2>8. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. After updates, we will notify you via in-app notifications. Continued use of the app constitutes your acceptance of the updated terms.</p>
+
+      <h2>9. Contact Us</h2>
+      <div class="highlight-box">
+        <p>If you have any questions about this agreement, please contact us:</p>
+        <ul>
+          <li><strong>In-App Feedback</strong>: Tap "Feedback" on the "Profile" page</li>
+          <li><strong>Email</strong>: <a href="mailto:solesnip@gmail.com">solesnip@gmail.com</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="footer">
-      <p>© 2026 咕卡贴贴 &nbsp;·&nbsp; <a href="privacy.html">隐私政策</a> &nbsp;·&nbsp; <a href="index.html">首页</a></p>
+      <p>
+        <span class="zh">© 2026 咕卡贴贴 &nbsp;·&nbsp; <a href="privacy.html">隐私政策</a> &nbsp;·&nbsp; <a href="index.html">首页</a></span>
+        <span class="en">© 2026 GuKa Sticker &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="index.html">Home</a></span>
+      </p>
     </div>
   </div>
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.documentElement.className = 'lang-' + lang;
+      document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+    }
+    (function () {
+      var saved = localStorage.getItem('lang');
+      var lang = saved || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
+      setLang(lang);
+    })();
+  </script>
 </body>
 </html>

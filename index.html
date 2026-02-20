@@ -69,19 +69,76 @@
       font-size: 12px;
       color: #E5E7EB;
     }
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      background: white;
+      border-radius: 20px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #9CA3AF;
+      transition: all 0.15s;
+    }
+    .lang-btn.active { background: #FBCFE8; color: #be185d; }
+    .en { display: none; }
+    html.lang-en .en { display: initial; }
+    html.lang-en .zh { display: none; }
   </style>
 </head>
 <body>
+  <div class="lang-switcher">
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">CN</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
   <div class="card">
     <div class="logo">🌸</div>
-    <div class="app-name">咕卡贴贴</div>
-    <div class="tagline">数字化咕卡贴纸制作应用<br>让每张照片变成可爱贴纸</div>
+    <div class="app-name">
+      <span class="zh">咕卡贴贴</span>
+      <span class="en">GuKa Sticker</span>
+    </div>
+    <div class="tagline">
+      <span class="zh">数字化咕卡贴纸制作应用<br>让每张照片变成可爱贴纸</span>
+      <span class="en">Digital Guka Sticker Creator<br>Turn every photo into an adorable sticker</span>
+    </div>
     <div class="divider"></div>
     <div class="links">
-      <a href="privacy.html" class="link-btn link-primary">隐私政策</a>
-      <a href="terms.html" class="link-btn link-secondary">用户协议</a>
+      <a href="privacy.html" class="link-btn link-primary">
+        <span class="zh">隐私政策</span><span class="en">Privacy Policy</span>
+      </a>
+      <a href="terms.html" class="link-btn link-secondary">
+        <span class="zh">用户协议</span><span class="en">Terms of Service</span>
+      </a>
     </div>
-    <div class="footer">© 2026 咕卡贴贴</div>
+    <div class="footer">
+      <span class="zh">© 2026 咕卡贴贴</span>
+      <span class="en">© 2026 GuKa Sticker</span>
+    </div>
   </div>
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.documentElement.className = 'lang-' + lang;
+      document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+    }
+    (function () {
+      var saved = localStorage.getItem('lang');
+      var lang = saved || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
+      setLang(lang);
+    })();
+  </script>
 </body>
 </html>

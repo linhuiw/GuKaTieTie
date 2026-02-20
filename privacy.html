@@ -52,126 +52,293 @@
     .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #F3F4F6; font-size: 13px; color: #D1D5DB; }
     .footer a { color: #be185d; text-decoration: none; }
     a { color: #be185d; }
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      background: white;
+      border-radius: 20px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #9CA3AF;
+      transition: all 0.15s;
+    }
+    .lang-btn.active { background: #FBCFE8; color: #be185d; }
+    .en { display: none; }
+    html.lang-en .en { display: initial; }
+    html.lang-en .zh { display: none; }
   </style>
 </head>
 <body>
+  <div class="lang-switcher">
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">CN</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
   <div class="container">
     <div class="header">
       <div class="logo">🌸</div>
-      <div class="app-name">咕卡贴贴</div>
-      <div class="doc-title">隐私政策</div>
-      <div class="meta">版本 1.0 &nbsp;·&nbsp; 生效日期：2026年3月1日</div>
+      <div class="app-name">
+        <span class="zh">咕卡贴贴</span>
+        <span class="en">GuKa Sticker</span>
+      </div>
+      <div class="doc-title">
+        <span class="zh">隐私政策</span>
+        <span class="en">Privacy Policy</span>
+      </div>
+      <div class="meta">
+        <span class="zh">版本 1.0 &nbsp;·&nbsp; 生效日期：2026年3月1日</span>
+        <span class="en">Version 1.0 &nbsp;·&nbsp; Effective Date: March 1, 2026</span>
+      </div>
     </div>
     <div class="divider"></div>
 
-    <div class="highlight-box">
-      咕卡贴贴深知个人隐私对您的重要性。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。在使用本应用前，请您仔细阅读。
+    <!-- Chinese Content -->
+    <div class="zh">
+      <div class="highlight-box">
+        咕卡贴贴深知个人隐私对您的重要性。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。在使用本应用前，请您仔细阅读。
+      </div>
+
+      <h2>一、我们收集的信息</h2>
+      <h3>1.1 账户信息</h3>
+      <p>当您使用 Apple ID 登录时，我们会收到：</p>
+      <ul>
+        <li>您的 Apple 用户唯一标识符（User Identifier）</li>
+        <li>您选择分享的姓名和邮箱地址（由 Apple 决定是否传递）</li>
+      </ul>
+
+      <h3>1.2 用户内容</h3>
+      <ul>
+        <li><strong>照片和图像</strong>：您通过相机拍摄或从相册选择的照片，用于 AI 贴纸生成</li>
+        <li><strong>生成的贴纸</strong>：AI 处理后生成的贴纸图像，存储于您的设备本地</li>
+      </ul>
+
+      <h3>1.3 使用数据</h3>
+      <ul>
+        <li><strong>应用内行为数据</strong>：如贴纸生成次数、使用功能等，用于改善服务</li>
+        <li><strong>崩溃报告</strong>：应用异常信息，用于技术问题排查（不含个人身份信息）</li>
+      </ul>
+
+      <h3>1.4 设备信息</h3>
+      <p>设备型号、iOS 版本等技术信息，用于确保应用兼容性。</p>
+
+      <h2>二、我们如何使用您的信息</h2>
+      <table>
+        <thead><tr><th>用途</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>提供核心服务</td><td>通过 AI 技术生成和处理贴纸</td></tr>
+          <tr><td>账户管理</td><td>维护您的登录状态和账户数据</td></tr>
+          <tr><td>个性化体验</td><td>保存您的贴纸收藏和使用偏好</td></tr>
+          <tr><td>服务改善</td><td>分析使用数据，优化功能和性能</td></tr>
+          <tr><td>安全保障</td><td>检测和防范违规或欺诈行为</td></tr>
+          <tr><td>客户支持</td><td>响应您的反馈和问题</td></tr>
+        </tbody>
+      </table>
+
+      <h2>三、信息共享</h2>
+      <p>我们<strong>不会出售</strong>您的个人信息。以下情况下，我们可能与第三方共享信息：</p>
+      <h3>3.1 技术服务商</h3>
+      <ul>
+        <li><strong>Google（Gemini AI）</strong>：您上传的图片将被发送至 Google Gemini API 进行 AI 处理。图片仅用于生成贴纸，不会被 Google 用于模型训练（基于 API 使用条款）</li>
+        <li><strong>Supabase</strong>：作为后端基础设施提供商，处理账户数据和 API 请求</li>
+      </ul>
+      <h3>3.2 法律要求</h3>
+      <p>当法律法规要求，或为保护我们的合法权益时，我们可能披露必要信息。</p>
+
+      <h2>四、数据存储与安全</h2>
+      <h3>4.1 存储位置</h3>
+      <ul>
+        <li><strong>本地存储</strong>：贴纸图片和收藏数据存储在您的设备本地，不上传至云端</li>
+        <li><strong>服务器存储</strong>：账户信息存储于 Supabase 服务器</li>
+      </ul>
+      <h3>4.2 数据安全</h3>
+      <ul>
+        <li>数据传输使用 HTTPS 加密</li>
+        <li>图片处理完成后，我们不在服务器长期保存您的原始照片</li>
+        <li>我们采用行业标准的安全措施保护您的数据</li>
+      </ul>
+      <h3>4.3 数据保留</h3>
+      <ul>
+        <li>账户数据在您主动删除账户前持续保存</li>
+        <li>临时处理的图像数据在生成完成后立即删除</li>
+      </ul>
+
+      <h2>五、您的权利</h2>
+      <ul>
+        <li><strong>访问权</strong>：查看我们持有的您的个人信息</li>
+        <li><strong>更正权</strong>：要求更正不准确的信息</li>
+        <li><strong>删除权</strong>：要求删除您的账户及相关数据</li>
+        <li><strong>数据可携权</strong>：获取您的数据副本</li>
+      </ul>
+      <p>如需行使上述权利，请通过应用内「意见反馈」或邮件联系我们。</p>
+
+      <h2>六、权限说明</h2>
+      <table>
+        <thead><tr><th>权限</th><th>用途</th><th>是否可拒绝</th></tr></thead>
+        <tbody>
+          <tr><td>相机</td><td>拍摄照片用于生成贴纸</td><td>可拒绝（将无法使用拍照功能）</td></tr>
+          <tr><td>相册读取</td><td>从相册选择图片</td><td>可拒绝（将无法从相册导入）</td></tr>
+          <tr><td>相册写入</td><td>将生成的贴纸保存到相册</td><td>可拒绝（将无法保存到相册）</td></tr>
+        </tbody>
+      </table>
+
+      <h2>七、儿童隐私</h2>
+      <p>本应用不针对 13 岁以下儿童。如果我们发现意外收集了儿童个人信息，将立即删除。如果您认为我们可能收集了您孩子的信息，请联系我们。</p>
+
+      <h2>八、跨境数据传输</h2>
+      <p>由于我们使用的技术服务商（Google、Supabase）位于境外，您的部分数据可能会被传输至中国大陆以外的地区处理。我们确保此类传输符合适用法律法规的要求。</p>
+
+      <h2>九、隐私政策更新</h2>
+      <p>我们可能定期更新本隐私政策。重大变更时，我们将通过应用内通知告知您。更新后的政策自发布之日起生效。</p>
+
+      <h2>十、联系我们</h2>
+      <div class="highlight-box">
+        <p>如对本隐私政策有任何疑问，请联系：</p>
+        <ul>
+          <li><strong>应用内反馈</strong>：在「我的」页面点击「意见反馈」</li>
+          <li><strong>电子邮件</strong>：<a href="mailto:solesnip@gmail.com">solesnip@gmail.com</a></li>
+        </ul>
+      </div>
     </div>
 
-    <h2>一、我们收集的信息</h2>
-    <h3>1.1 账户信息</h3>
-    <p>当您使用 Apple ID 登录时，我们会收到：</p>
-    <ul>
-      <li>您的 Apple 用户唯一标识符（User Identifier）</li>
-      <li>您选择分享的姓名和邮箱地址（由 Apple 决定是否传递）</li>
-    </ul>
+    <!-- English Content -->
+    <div class="en">
+      <div class="highlight-box">
+        GuKa Sticker takes your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your personal information. Please read this carefully before using the app.
+      </div>
 
-    <h3>1.2 用户内容</h3>
-    <ul>
-      <li><strong>照片和图像</strong>：您通过相机拍摄或从相册选择的照片，用于 AI 贴纸生成</li>
-      <li><strong>生成的贴纸</strong>：AI 处理后生成的贴纸图像，存储于您的设备本地</li>
-    </ul>
-
-    <h3>1.3 使用数据</h3>
-    <ul>
-      <li><strong>应用内行为数据</strong>：如贴纸生成次数、使用功能等，用于改善服务</li>
-      <li><strong>崩溃报告</strong>：应用异常信息，用于技术问题排查（不含个人身份信息）</li>
-    </ul>
-
-    <h3>1.4 设备信息</h3>
-    <p>设备型号、iOS 版本等技术信息，用于确保应用兼容性。</p>
-
-    <h2>二、我们如何使用您的信息</h2>
-    <table>
-      <thead><tr><th>用途</th><th>说明</th></tr></thead>
-      <tbody>
-        <tr><td>提供核心服务</td><td>通过 AI 技术生成和处理贴纸</td></tr>
-        <tr><td>账户管理</td><td>维护您的登录状态和账户数据</td></tr>
-        <tr><td>个性化体验</td><td>保存您的贴纸收藏和使用偏好</td></tr>
-        <tr><td>服务改善</td><td>分析使用数据，优化功能和性能</td></tr>
-        <tr><td>安全保障</td><td>检测和防范违规或欺诈行为</td></tr>
-        <tr><td>客户支持</td><td>响应您的反馈和问题</td></tr>
-      </tbody>
-    </table>
-
-    <h2>三、信息共享</h2>
-    <p>我们<strong>不会出售</strong>您的个人信息。以下情况下，我们可能与第三方共享信息：</p>
-    <h3>3.1 技术服务商</h3>
-    <ul>
-      <li><strong>Google（Gemini AI）</strong>：您上传的图片将被发送至 Google Gemini API 进行 AI 处理。图片仅用于生成贴纸，不会被 Google 用于模型训练（基于 API 使用条款）</li>
-      <li><strong>Supabase</strong>：作为后端基础设施提供商，处理账户数据和 API 请求</li>
-    </ul>
-    <h3>3.2 法律要求</h3>
-    <p>当法律法规要求，或为保护我们的合法权益时，我们可能披露必要信息。</p>
-
-    <h2>四、数据存储与安全</h2>
-    <h3>4.1 存储位置</h3>
-    <ul>
-      <li><strong>本地存储</strong>：贴纸图片和收藏数据存储在您的设备本地，不上传至云端</li>
-      <li><strong>服务器存储</strong>：账户信息存储于 Supabase 服务器</li>
-    </ul>
-    <h3>4.2 数据安全</h3>
-    <ul>
-      <li>数据传输使用 HTTPS 加密</li>
-      <li>图片处理完成后，我们不在服务器长期保存您的原始照片</li>
-      <li>我们采用行业标准的安全措施保护您的数据</li>
-    </ul>
-    <h3>4.3 数据保留</h3>
-    <ul>
-      <li>账户数据在您主动删除账户前持续保存</li>
-      <li>临时处理的图像数据在生成完成后立即删除</li>
-    </ul>
-
-    <h2>五、您的权利</h2>
-    <ul>
-      <li><strong>访问权</strong>：查看我们持有的您的个人信息</li>
-      <li><strong>更正权</strong>：要求更正不准确的信息</li>
-      <li><strong>删除权</strong>：要求删除您的账户及相关数据</li>
-      <li><strong>数据可携权</strong>：获取您的数据副本</li>
-    </ul>
-    <p>如需行使上述权利，请通过应用内「意见反馈」或邮件联系我们。</p>
-
-    <h2>六、权限说明</h2>
-    <table>
-      <thead><tr><th>权限</th><th>用途</th><th>是否可拒绝</th></tr></thead>
-      <tbody>
-        <tr><td>相机</td><td>拍摄照片用于生成贴纸</td><td>可拒绝（将无法使用拍照功能）</td></tr>
-        <tr><td>相册读取</td><td>从相册选择图片</td><td>可拒绝（将无法从相册导入）</td></tr>
-        <tr><td>相册写入</td><td>将生成的贴纸保存到相册</td><td>可拒绝（将无法保存到相册）</td></tr>
-      </tbody>
-    </table>
-
-    <h2>七、儿童隐私</h2>
-    <p>本应用不针对 13 岁以下儿童。如果我们发现意外收集了儿童个人信息，将立即删除。如果您认为我们可能收集了您孩子的信息，请联系我们。</p>
-
-    <h2>八、跨境数据传输</h2>
-    <p>由于我们使用的技术服务商（Google、Supabase）位于境外，您的部分数据可能会被传输至中国大陆以外的地区处理。我们确保此类传输符合适用法律法规的要求。</p>
-
-    <h2>九、隐私政策更新</h2>
-    <p>我们可能定期更新本隐私政策。重大变更时，我们将通过应用内通知告知您。更新后的政策自发布之日起生效。</p>
-
-    <h2>十、联系我们</h2>
-    <div class="highlight-box">
-      <p>如对本隐私政策有任何疑问，请联系：</p>
+      <h2>1. Information We Collect</h2>
+      <h3>1.1 Account Information</h3>
+      <p>When you sign in with Apple ID, we receive:</p>
       <ul>
-        <li><strong>应用内反馈</strong>：在「我的」页面点击「意见反馈」</li>
-        <li><strong>电子邮件</strong>：<a href="mailto:privacy@guka.app">privacy@guka.app</a></li>
+        <li>Your Apple User Identifier</li>
+        <li>Your name and email address if you choose to share them (as provided by Apple)</li>
       </ul>
+
+      <h3>1.2 User Content</h3>
+      <ul>
+        <li><strong>Photos and Images</strong>: Photos taken with your camera or selected from your photo library, used for AI sticker generation</li>
+        <li><strong>Generated Stickers</strong>: Sticker images created by AI processing, stored locally on your device</li>
+      </ul>
+
+      <h3>1.3 Usage Data</h3>
+      <ul>
+        <li><strong>In-App Behavior</strong>: Data such as sticker generation count and features used, to improve our service</li>
+        <li><strong>Crash Reports</strong>: App error information for technical troubleshooting (no personally identifiable information included)</li>
+      </ul>
+
+      <h3>1.4 Device Information</h3>
+      <p>Technical information such as device model and iOS version, to ensure app compatibility.</p>
+
+      <h2>2. How We Use Your Information</h2>
+      <table>
+        <thead><tr><th>Purpose</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Core Service</td><td>Generate and process stickers using AI technology</td></tr>
+          <tr><td>Account Management</td><td>Maintain your login status and account data</td></tr>
+          <tr><td>Personalization</td><td>Save your sticker collection and usage preferences</td></tr>
+          <tr><td>Service Improvement</td><td>Analyze usage data to optimize features and performance</td></tr>
+          <tr><td>Security</td><td>Detect and prevent violations or fraudulent behavior</td></tr>
+          <tr><td>Customer Support</td><td>Respond to your feedback and inquiries</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3. Information Sharing</h2>
+      <p>We <strong>do not sell</strong> your personal information. We may share information with third parties in the following circumstances:</p>
+      <h3>3.1 Technology Service Providers</h3>
+      <ul>
+        <li><strong>Google (Gemini AI)</strong>: Images you upload are sent to the Google Gemini API for AI processing. Images are used solely for sticker generation and will not be used by Google for model training (per API terms of use)</li>
+        <li><strong>Supabase</strong>: As our backend infrastructure provider, handles account data and API requests</li>
+      </ul>
+      <h3>3.2 Legal Requirements</h3>
+      <p>We may disclose necessary information when required by law or to protect our legitimate interests.</p>
+
+      <h2>4. Data Storage &amp; Security</h2>
+      <h3>4.1 Storage Location</h3>
+      <ul>
+        <li><strong>Local Storage</strong>: Sticker images and collection data are stored locally on your device and are not uploaded to the cloud</li>
+        <li><strong>Server Storage</strong>: Account information is stored on Supabase servers</li>
+      </ul>
+      <h3>4.2 Data Security</h3>
+      <ul>
+        <li>Data transmission uses HTTPS encryption</li>
+        <li>We do not retain your original photos on our servers after image processing is complete</li>
+        <li>We apply industry-standard security measures to protect your data</li>
+      </ul>
+      <h3>4.3 Data Retention</h3>
+      <ul>
+        <li>Account data is retained until you actively delete your account</li>
+        <li>Temporarily processed image data is deleted immediately after generation is complete</li>
+      </ul>
+
+      <h2>5. Your Rights</h2>
+      <ul>
+        <li><strong>Access</strong>: View the personal information we hold about you</li>
+        <li><strong>Correction</strong>: Request correction of inaccurate information</li>
+        <li><strong>Deletion</strong>: Request deletion of your account and associated data</li>
+        <li><strong>Data Portability</strong>: Obtain a copy of your data</li>
+      </ul>
+      <p>To exercise these rights, please contact us via the in-app "Feedback" feature or by email.</p>
+
+      <h2>6. Permissions</h2>
+      <table>
+        <thead><tr><th>Permission</th><th>Purpose</th><th>Can be denied?</th></tr></thead>
+        <tbody>
+          <tr><td>Camera</td><td>Take photos for sticker generation</td><td>Yes (camera feature will be unavailable)</td></tr>
+          <tr><td>Photo Library Read</td><td>Select images from your library</td><td>Yes (library import will be unavailable)</td></tr>
+          <tr><td>Photo Library Write</td><td>Save generated stickers to your library</td><td>Yes (saving to library will be unavailable)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>7. Children's Privacy</h2>
+      <p>This app is not directed at children under 13. If we discover we have inadvertently collected personal information from a child, we will delete it immediately. If you believe we may have collected your child's information, please contact us.</p>
+
+      <h2>8. Cross-Border Data Transfer</h2>
+      <p>Since our technology service providers (Google, Supabase) are located outside China, some of your data may be transferred and processed outside mainland China. We ensure such transfers comply with applicable laws and regulations.</p>
+
+      <h2>9. Policy Updates</h2>
+      <p>We may update this Privacy Policy periodically. For significant changes, we will notify you through in-app notifications. Updated policies take effect from the date of publication.</p>
+
+      <h2>10. Contact Us</h2>
+      <div class="highlight-box">
+        <p>If you have any questions about this Privacy Policy, please contact us:</p>
+        <ul>
+          <li><strong>In-App Feedback</strong>: Tap "Feedback" on the "Profile" page</li>
+          <li><strong>Email</strong>: <a href="mailto:solesnip@gmail.com">solesnip@gmail.com</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="footer">
-      <p>© 2026 咕卡贴贴 &nbsp;·&nbsp; <a href="terms.html">用户协议</a> &nbsp;·&nbsp; <a href="index.html">首页</a></p>
+      <p>
+        <span class="zh">© 2026 咕卡贴贴 &nbsp;·&nbsp; <a href="terms.html">用户协议</a> &nbsp;·&nbsp; <a href="index.html">首页</a></span>
+        <span class="en">© 2026 GuKa Sticker &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="index.html">Home</a></span>
+      </p>
     </div>
   </div>
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.documentElement.className = 'lang-' + lang;
+      document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+    }
+    (function () {
+      var saved = localStorage.getItem('lang');
+      var lang = saved || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
+      setLang(lang);
+    })();
+  </script>
 </body>
 </html>
