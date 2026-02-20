@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuKa Sticker · App Store 提交前自检清单</title>
+  <meta name="description" content="咕卡贴贴 App Store 提交前逐条自检清单（可打勾、自动保存进度）。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Nunito:wght@500;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fffaf5;
+      --paper: rgba(255,255,255,0.85);
+      --ink: #403446;
+      --muted: #7b6f84;
+      --line: #efdaea;
+      --pink: #f260a5;
+      --violet: #9562ff;
+      --blue: #5f9eff;
+      --mint: #56d8b2;
+      --shadow: 0 16px 44px rgba(120, 76, 151, 0.15);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans SC", "Nunito", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% 6%, rgba(149,98,255,.2), transparent 28%),
+        radial-gradient(circle at 8% 12%, rgba(242,96,165,.18), transparent 26%),
+        repeating-linear-gradient(0deg, transparent 0 32px, rgba(242,96,165,.04) 32px 33px),
+        var(--bg);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding: 24px 14px 56px;
+    }
+
+    .wrap { max-width: 980px; margin: 0 auto; }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(255,244,251,.85), rgba(245,241,255,.85) 50%, rgba(239,247,255,.85));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.45) 50%, transparent 62%);
+      pointer-events: none;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 10px 26px rgba(76, 38, 117, .22);
+      border: 2px solid rgba(255,255,255,.85);
+      position: relative;
+      z-index: 1;
+    }
+    .title {
+      margin: 0;
+      font-family: "ZCOOL XiaoWei", serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      letter-spacing: .02em;
+      position: relative;
+      z-index: 1;
+    }
+    .subtitle {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .96rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .toolbar {
+      margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .progress-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 280px;
+    }
+    .track { height: 8px; flex: 1; border-radius: 999px; background: #f3e8f3; overflow: hidden; }
+    .bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--violet), var(--blue)); transition: width .25s ease; }
+    .pct { font-weight: 800; color: #7f3f74; font-size: .86rem; min-width: 42px; text-align: right; }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #704b78;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    button.primary {
+      color: #fff;
+      border: none;
+      background: linear-gradient(130deg, var(--pink), var(--violet) 52%, var(--blue));
+      box-shadow: 0 10px 22px rgba(149, 98, 255, .28);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 24px rgba(137,102,164,.08);
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      color: #7e2f69;
+    }
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dashed #ecdcec;
+      font-size: .92rem;
+    }
+    .item:last-child { border-bottom: none; }
+    input[type="checkbox"] {
+      margin-top: 2px;
+      width: 16px;
+      height: 16px;
+      accent-color: #8f54ff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .note {
+      margin-top: 14px;
+      background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(244,250,255,.9));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      font-size: .88rem;
+      color: #715f7d;
+    }
+    .note a { color: #7f3ea8; text-decoration: none; }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .progress-box { min-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <img class="logo" src="./AppIcon.png" alt="GuKa Sticker Logo" />
+      <div>
+        <h1 class="title">GuKa Sticker · App Store 提交前自检清单</h1>
+        <p class="subtitle">可打勾、自动保存进度（本地存储）。更新日期：2026-02-20</p>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="progress-box">
+        <span style="font-size:.84rem;color:#8a6a8f;">完成度</span>
+        <div class="track"><div class="bar" id="bar"></div></div>
+        <span class="pct" id="pct">0%</span>
+      </div>
+      <div class="actions">
+        <button class="primary" id="checkAll">全部勾选</button>
+        <button id="clearAll">清空勾选</button>
+      </div>
+    </div>
+
+    <section class="grid" id="checklist">
+      <article class="card">
+        <h2>1) 基础可提审（2.1）</h2>
+        <label class="item"><input type="checkbox" data-key="b1" />App 无崩溃、无明显 bug（真机 + 最新 iOS）</label>
+        <label class="item"><input type="checkbox" data-key="b2" />无占位内容（未开放功能无可点击入口）</label>
+        <label class="item"><input type="checkbox" data-key="b3" />所有链接可访问（支持页/隐私/条款）</label>
+        <label class="item"><input type="checkbox" data-key="b4" />Review 测试账号或测试路径可用</label>
+      </article>
+
+      <article class="card">
+        <h2>2) 隐私与数据（5.1）</h2>
+        <label class="item"><input type="checkbox" data-key="p1" />ASC 已填写 Privacy Policy URL</label>
+        <label class="item"><input type="checkbox" data-key="p2" />隐私政策与真实数据流一致</label>
+        <label class="item"><input type="checkbox" data-key="p3" />App Privacy（营养标签）已完整填写</label>
+        <label class="item"><input type="checkbox" data-key="p4" />第三方（Supabase/AI API）数据声明一致</label>
+        <label class="item"><input type="checkbox" data-key="p5" />若有追踪行为，ATT 流程已实现</label>
+      </article>
+
+      <article class="card">
+        <h2>3) 自动续费订阅（3.1.2）</h2>
+        <label class="item"><input type="checkbox" data-key="s1" />展示订阅名称、周期、价格</label>
+        <label class="item"><input type="checkbox" data-key="s2" />试用规则与试用后价格清晰</label>
+        <label class="item"><input type="checkbox" data-key="s3" />App 内可访问 Privacy + Terms/EULA</label>
+        <label class="item"><input type="checkbox" data-key="s4" />提供 Restore Purchases 入口</label>
+        <label class="item"><input type="checkbox" data-key="s5" />取消路径与 24 小时规则已说明</label>
+      </article>
+
+      <article class="card">
+        <h2>4) 元数据与素材</h2>
+        <label class="item"><input type="checkbox" data-key="m1" />描述、截图、视频与当前版本一致</label>
+        <label class="item"><input type="checkbox" data-key="m2" />分类、年龄分级、内容声明准确</label>
+        <label class="item"><input type="checkbox" data-key="m3" />关键词无违规词/侵权风险</label>
+        <label class="item"><input type="checkbox" data-key="m4" />Support URL/Marketing URL 可访问</label>
+      </article>
+
+      <article class="card">
+        <h2>5) 审核沟通与发布</h2>
+        <label class="item"><input type="checkbox" data-key="r1" />Review Notes 写清核心测试路径</label>
+        <label class="item"><input type="checkbox" data-key="r2" />地区/账号限制已在 Notes 说明</label>
+        <label class="item"><input type="checkbox" data-key="r3" />版权或第三方授权文件已准备</label>
+        <label class="item"><input type="checkbox" data-key="r4" />上线后监控崩溃与审核反馈机制就绪</label>
+      </article>
+
+      <article class="card">
+        <h2>6) GuKa Sticker 专项补查</h2>
+        <label class="item"><input type="checkbox" data-key="g1" />index/privacy/terms 已部署 HTTPS 域名</label>
+        <label class="item"><input type="checkbox" data-key="g2" />联系邮箱可收件且有人值守</label>
+        <label class="item"><input type="checkbox" data-key="g3" />隐私文案与 Gemini/Supabase 实现一致</label>
+        <label class="item"><input type="checkbox" data-key="g4" />订阅文案与 App Store Connect 配置一致</label>
+        <label class="item"><input type="checkbox" data-key="g5" />审核包使用最终产线 API 配置校对完成</label>
+      </article>
+    </section>
+
+    <section class="note">
+      官方参考：
+      <a href="https://developer.apple.com/app-store/review/guidelines/" target="_blank" rel="noopener noreferrer">App Review Guidelines</a> ·
+      <a href="https://developer.apple.com/app-store/subscriptions/" target="_blank" rel="noopener noreferrer">Subscriptions</a> ·
+      <a href="https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy" target="_blank" rel="noopener noreferrer">App Privacy</a> ·
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Standard EULA</a>
+    </section>
+  </main>
+
+  <script>
+    const KEY = 'guka_appstore_checklist_v1';
+    const boxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    const bar = document.getElementById('bar');
+    const pct = document.getElementById('pct');
+
+    function save() {
+      const data = {};
+      boxes.forEach(b => data[b.dataset.key] = b.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+
+    function load() {
+      try {
+        const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        boxes.forEach(b => b.checked = Boolean(data[b.dataset.key]));
+      } catch {}
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const done = boxes.filter(b => b.checked).length;
+      const total = boxes.length;
+      const v = total ? Math.round((done / total) * 100) : 0;
+      bar.style.width = v + '%';
+      pct.textContent = v + '%';
+    }
+
+    boxes.forEach(b => b.addEventListener('change', () => { save(); updateProgress(); }));
+
+    document.getElementById('checkAll').addEventListener('click', () => {
+      boxes.forEach(b => b.checked = true);
+      save(); updateProgress();
+    });
+
+    document.getElementById('clearAll').addEventListener('click', () => {
+      boxes.forEach(b => b.checked = false);
+      save(); updateProgress();
+    });
+
+    load();
+  </script>
+</body>
+</html>

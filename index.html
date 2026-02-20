@@ -1,144 +1,310 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>咕卡贴贴</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咕卡贴贴｜把照片做成会发光的专属贴纸</title>
+  <meta name="description" content="咕卡贴贴：AI 一键抠图、异形描边、贴纸收藏册与 A5 打印排版，让每张照片变成可收藏的专属贴纸。" />
+  <meta property="og:title" content="咕卡贴贴｜把照片做成会发光的专属贴纸" />
+  <meta property="og:description" content="AI 一键抠图、异形描边、收藏册、A5 打印排版。" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Nunito:wght@500;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #fffdf8;
+      --paper-2: #fff7ef;
+      --ink: #3d3a44;
+      --muted: #7b7488;
+      --line: #f0dbe9;
+      --pink: #ff6ea8;
+      --rose: #ff9ac4;
+      --lilac: #d9b8ff;
+      --sky: #b5d8ff;
+      --mint: #baf7da;
+      --shadow: 0 14px 40px rgba(111, 72, 127, 0.14);
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #EFF6FF 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      font-family: "Noto Sans SC", "Nunito", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 88% 10%, rgba(217, 184, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 12% 18%, rgba(255, 154, 196, 0.2), transparent 30%),
+        repeating-linear-gradient(0deg, transparent 0 34px, rgba(255, 110, 168, 0.05) 34px 35px),
+        var(--paper);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
+
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 253, 248, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 20px;
+      background: linear-gradient(150deg, #ffe5f0, #e7d8ff 60%, #d4ecff);
+      box-shadow: 0 8px 18px rgba(215, 122, 182, 0.25);
+    }
+    .brand span {
+      font-family: "Ma Shan Zheng", cursive;
+      font-size: 1.55rem;
+      color: #8b3870;
+      letter-spacing: 0.02em;
+    }
+
+    .nav { display: flex; gap: 10px; align-items: center; }
+    .nav a {
+      text-decoration: none; color: var(--muted); font-weight: 600; font-size: 0.92rem;
+      padding: 8px 12px; border-radius: 999px; border: 1px solid transparent;
+    }
+    .nav a:hover { color: #922b67; border-color: #f4cde1; background: rgba(255,255,255,.8); }
+    .badge-store {
+      border: 1px solid #ffd1e6 !important;
+      background: linear-gradient(130deg, #ff88ba, #dcb7ff);
+      color: #fff !important;
+    }
+
+    .hero { padding: 64px 0 28px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 34px; align-items: center; }
+    .hero-kicker {
+      display: inline-flex; gap: 8px; align-items: center;
+      background: #fff; border: 1px solid #ffd9eb; border-radius: 999px; padding: 6px 12px;
+      color: #b03f79; font-weight: 700; font-size: .78rem;
+      box-shadow: 0 6px 16px rgba(248, 145, 193, .22);
+    }
+    .hero h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(2rem, 4.6vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      font-weight: 900;
+      font-family: "Nunito", "Noto Sans SC", sans-serif;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(100deg, #ff6ea8, #9f64ff 45%, #5ca4ff 85%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p { margin: 0; color: var(--muted); max-width: 50ch; }
+    .hero-actions { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none; font-weight: 800; border-radius: 999px; padding: 11px 18px;
+      font-size: .95rem; border: 1px solid transparent;
+    }
+    .btn-main { color:#fff; background: linear-gradient(130deg, #ff7eb3, #c08fff 55%, #88bbff); box-shadow: var(--shadow); }
+    .btn-sub { color:#6f4f70; background: rgba(255,255,255,.8); border-color: #f2d7e7; }
+
+    .hero-note { margin-top: 12px; color: #9a8aa5; font-size: .83rem; }
+
+    .phone-card {
+      background: linear-gradient(170deg, #fff, #fff7fb);
+      border: 1px solid #f5ddeb; border-radius: 30px; padding: 20px;
+      box-shadow: var(--shadow); position: relative;
+      transform: rotate(-2deg);
+    }
+    .phone {
+      border-radius: 28px; border: 4px solid #f0ebf4;
+      overflow: hidden; background: #fff;
+    }
+    .phone-head { padding: 12px 14px; font-size: .78rem; font-weight: 700; background: #fcf2f8; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+    .g {
+      min-height: 72px; border-radius: 14px; display: grid; place-items: center;
+      font-size: 1.9rem; border: 1px dashed rgba(133, 97, 150, .22);
+    }
+    .g:nth-child(1){background:#fee9f3}
+    .g:nth-child(2){background:#ece4ff}
+    .g:nth-child(3){background:#dff2ff}
+    .g:nth-child(4){background:#e9ffe9}
+    .g:nth-child(5){background:#fff6cf}
+    .g:nth-child(6){background:#ffeede}
+
+    section { padding: 48px 0; }
+    .section-head { text-align: center; margin-bottom: 22px; }
+    .section-head .mini { color: #b34583; font-weight: 700; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+    .section-head h2 { margin: 8px 0 0; font-size: clamp(1.5rem, 3vw, 2.3rem); }
+    .section-head p { color: var(--muted); margin: 8px 0 0; }
+
+    .feature-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
     .card {
-      background: white;
-      border-radius: 28px;
-      padding: 48px 40px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(251, 207, 232, 0.3), 0 2px 8px rgba(0,0,0,0.06);
+      background: rgba(255,255,255,.78);
+      border: 1px solid #efd8e8;
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(150, 115, 170, .08);
     }
-    .logo { font-size: 56px; margin-bottom: 16px; }
-    .app-name {
-      font-size: 28px;
-      font-weight: 800;
-      color: #be185d;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
+    .card h3 { margin: 8px 0 6px; font-size: 1.03rem; }
+    .card p { margin: 0; color: #7f778f; font-size: .92rem; }
+    .card .icon { font-size: 1.55rem; }
+
+    .flow {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
     }
-    .tagline {
-      font-size: 15px;
-      color: #9CA3AF;
-      margin-bottom: 40px;
-      line-height: 1.6;
+    .step {
+      background: linear-gradient(165deg, #fff, #fff6fb);
+      border: 1px solid #f2dae9; border-radius: var(--radius-sm); padding: 16px;
     }
-    .divider {
-      height: 2px;
-      background: linear-gradient(90deg, #FBCFE8, #E9D5FF, #BFDBFE);
-      border-radius: 99px;
-      margin-bottom: 32px;
+    .step b { display: inline-block; color: #923f73; margin-bottom: 6px; }
+
+    .cta {
+      border-radius: 32px;
+      border: 1px solid #f0d8e7;
+      background: linear-gradient(140deg, #fff2f8, #f8f4ff 42%, #eef6ff);
+      padding: 38px 24px; text-align: center;
+      box-shadow: var(--shadow);
     }
-    .links { display: flex; flex-direction: column; gap: 12px; }
-    .link-btn {
-      display: block;
-      padding: 14px 24px;
-      border-radius: 16px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 600;
-      transition: transform 0.15s, box-shadow 0.15s;
+    .cta h2 { margin: 0 0 8px; font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
+    .cta p { margin: 0 auto; color: #7c6f8f; max-width: 56ch; }
+    .cta-links { margin-top: 16px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+    .legal {
+      margin-top: 12px;
+      font-size: .83rem;
+      color: #8e809d;
     }
-    .link-btn:active { transform: scale(0.97); }
-    .link-primary {
-      background: linear-gradient(135deg, #FBCFE8, #E9D5FF);
-      color: #be185d;
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid var(--line);
+      padding: 24px 0 34px;
+      color: #907e9b;
+      font-size: .86rem;
     }
-    .link-secondary {
-      background: #F9FAFB;
-      color: #6B7280;
-      border: 1px solid #F3F4F6;
+    .footer-row { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .footer-links { display:flex; gap:14px; }
+    .footer-links a { color: #8a3c74; text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { grid-template-columns: 1fr; }
+      .phone-card { transform: none; max-width: 360px; margin: 0 auto; }
     }
-    .footer {
-      margin-top: 32px;
-      font-size: 12px;
-      color: #E5E7EB;
+    @media (max-width: 640px) {
+      .nav a:not(.badge-store) { display:none; }
+      .flow { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 42px; }
     }
-    .lang-switcher {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      display: flex;
-      background: white;
-      border-radius: 20px;
-      padding: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1000;
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
     }
-    .lang-btn {
-      border: none;
-      background: none;
-      padding: 4px 10px;
-      border-radius: 16px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #9CA3AF;
-      transition: all 0.15s;
-    }
-    .lang-btn.active { background: #FBCFE8; color: #be185d; }
-    .en { display: none; }
-    html.lang-en .en { display: initial; }
-    html.lang-en .zh { display: none; }
   </style>
 </head>
 <body>
-  <div class="lang-switcher">
-    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">CN</button>
-    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-  </div>
-  <div class="card">
-    <div class="logo">🌸</div>
-    <div class="app-name">
-      <span class="zh">咕卡贴贴</span>
-      <span class="en">GuKa Sticker</span>
-    </div>
-    <div class="tagline">
-      <span class="zh">数字化咕卡贴纸制作应用<br>让每张照片变成可爱贴纸</span>
-      <span class="en">Digital Guka Sticker Creator<br>Turn every photo into an adorable sticker</span>
-    </div>
-    <div class="divider"></div>
-    <div class="links">
-      <a href="privacy.html" class="link-btn link-primary">
-        <span class="zh">隐私政策</span><span class="en">Privacy Policy</span>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#top" class="brand" aria-label="咕卡贴贴首页">
+        <span class="brand-mark">🌸</span>
+        <span>咕卡贴贴</span>
       </a>
-      <a href="terms.html" class="link-btn link-secondary">
-        <span class="zh">用户协议</span><span class="en">Terms of Service</span>
-      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#features">功能</a>
+        <a href="#workflow">流程</a>
+        <a href="privacy.html">隐私</a>
+        <a href="terms.html">条款</a>
+        <a href="#cta" class="badge-store">即将上线 App Store</a>
+      </nav>
     </div>
-    <div class="footer">
-      <span class="zh">© 2026 咕卡贴贴</span>
-      <span class="en">© 2026 GuKa Sticker</span>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="hero-kicker">✨ New Scrapbook UI · iOS 17+</span>
+          <h1>把每张照片，<br />做成你会反复收藏的 <em>专属贴纸</em></h1>
+          <p>AI 一键抠图 + 异形描边 + 收藏册管理 + A5 打印排版。咕卡贴贴把实体咕卡的仪式感，完整带到手机里。</p>
+          <div class="hero-actions">
+            <a class="btn btn-main" href="#cta">🍎 预约 App Store 上线</a>
+            <a class="btn btn-sub" href="#features">先看核心功能</a>
+          </div>
+          <p class="hero-note">免费下载安装（含可选订阅项） · 中文界面 · 支持导出到相册</p>
+        </div>
+        <div class="phone-card" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-head">我的收藏册 · 今日新增 6 张</div>
+            <div class="grid">
+              <div class="g">🐱</div><div class="g">🦋</div>
+              <div class="g">🌻</div><div class="g">⭐</div>
+              <div class="g">🍋</div><div class="g">🫐</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="mini">Core Features</div>
+          <h2>更像真实手作体验，不只是套滤镜</h2>
+          <p>每个环节都围绕“可收藏、可打印、可分享”设计。</p>
+        </div>
+        <div class="feature-grid">
+          <article class="card"><div class="icon">🪄</div><h3>AI 智能抠图</h3><p>自动识别主体，减少手动修边。</p></article>
+          <article class="card"><div class="icon">✂️</div><h3>异形描边</h3><p>描边粗细、颜色可调，风格更统一。</p></article>
+          <article class="card"><div class="icon">📚</div><h3>收藏册分组</h3><p>按主题管理贴纸，查找更快。</p></article>
+          <article class="card"><div class="icon">🖨️</div><h3>A5 打印排版</h3><p>一键导出版面，兼顾屏幕和实体质感。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="mini">Workflow</div>
+          <h2>30 秒完成一套咕卡贴纸</h2>
+        </div>
+        <div class="flow">
+          <article class="step"><b>01 选图</b><div>从相册导入，或直接拍照。</div></article>
+          <article class="step"><b>02 生成</b><div>AI 抠图并套用你选择的风格。</div></article>
+          <article class="step"><b>03 收藏/导出</b><div>存入收藏册并导出打印或分享。</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta">
+      <div class="wrap">
+        <div class="cta">
+          <h2>准备好开始你的数字咕卡册了吗？</h2>
+          <p>上线后可在 App Store 下载。关于数据处理、订阅和账户管理，请先阅读隐私政策与用户协议。</p>
+          <div class="cta-links">
+            <a href="privacy.html" class="btn btn-sub">隐私政策</a>
+            <a href="terms.html" class="btn btn-sub">用户协议</a>
+            <span class="btn btn-main" aria-disabled="true">即将上线 App Store</span>
+          </div>
+          <div class="legal">订阅为自动续费模式（如启用），价格与周期以 App Store 页面显示为准，可在 Apple ID 订阅管理中取消。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>© 2026 咕卡贴贴 · Made for sticker lovers 🌸</div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Standard EULA</a>
+      </div>
     </div>
-  </div>
-  <script>
-    function setLang(lang) {
-      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-      document.documentElement.className = 'lang-' + lang;
-      document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      localStorage.setItem('lang', lang);
-    }
-    (function () {
-      var saved = localStorage.getItem('lang');
-      var lang = saved || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
-      setLang(lang);
-    })();
-  </script>
+  </footer>
 </body>
 </html>
